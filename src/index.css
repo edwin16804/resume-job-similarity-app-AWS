@@ -11,3 +11,16 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+@font-face {
+  font-family: "NeutralFace";
+  src: local("NewutralFace"),
+   url("./Fonts/Neutral face/NeutralFace.otf") format("truetype");
+  font-weight: bold;
+ }
+
+@font-face {
+  font-family: "YeagerFont";
+  src: local("NewutralFace"),
+   url("./Fonts/Neutral face/Yeager Font/Yeager Fonts/Yeager-Regular.otf") format("truetype");
+  font-weight: bold;
+ }

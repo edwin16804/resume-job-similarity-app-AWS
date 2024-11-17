@@ -1,0 +1,90 @@
+.Firstpage-main {
+    height: 100vh;
+    overflow: hidden;
+    padding: 1%;
+    display: flex;
+    flex-direction: column;
+    gap: 100px;
+    background-color: rgb(255, 255, 255);
+}
+
+.Header1 {
+    padding: 5px;
+    width: 100%;
+    font-family: "YeagerFont";
+}
+
+.Header1 p {
+    font-size: 40px;
+    margin: 0;
+    color:rgb(0, 0, 0);
+}
+
+.button1 {
+    font-size: 25px;
+    color: rgb(0, 0, 0);
+    cursor: pointer;
+    margin: 0;
+    margin-left: 85%;
+
+}
+
+.Header1 p,
+.Header1 h2 {
+    display: inline-block;
+    vertical-align: middle;
+
+}
+
+.Firstpage-content {
+    color:rgb(0, 0, 0);
+    font-size: 40px;
+    width: 50%;
+    padding: 10px;
+    font-family: "YeagerFont";
+    border-radius: 10px;
+    
+
+}
+
+.get-started {
+    border-radius: .25rem;
+    text-transform: uppercase;
+    font-style: inherit;
+    font-weight: 400;
+    padding-left: 25px;
+    padding-right: 25px;
+    color: #fff;
+    height: 50px;
+    font-size: 20px;
+    line-height: 14px;
+    letter-spacing: 1.2px;
+    transition: .2s .1s;
+    background-image: linear-gradient(90deg, #4230e7, #2420fb);
+    border: 0 solid;
+    overflow: hidden;
+    margin-top: 10%;
+
+}
+
+.get-started:hover {
+    cursor: pointer;
+    transition: all .3s ease-in;
+    padding-right: 30px;
+    padding-left: 30px;
+}
+
+svg {
+    position: absolute;
+    top: 70px;
+    left: 800px;
+    z-index: 1;
+}
+
+img {
+    width: 500px;
+    position: absolute;
+    top: 240px;
+    left: 900px;
+    z-index: 2;
+}

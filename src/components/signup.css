@@ -1,0 +1,65 @@
+/* login.css */
+
+.signup-page {
+    height: 100vh; 
+    background-color: #95c3ff; /* Set background color only for the login page */
+    margin: 0;
+    padding: 0;
+    overflow:hidden;
+}
+
+.signup-page .main {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    overflow:hidden;
+}
+.main .signup-details {
+    margin: 20px;
+    background-color: white;
+    border: none;
+    border-radius: 10px;
+    width: 35%;
+    padding: 20px; /* Add padding for better spacing */
+    display: flex;
+    flex-direction: column; /* Arrange children in a column */
+    justify-content: center;
+    align-items: center;
+    box-shadow: rgba(0, 123, 255, 0.4) -5px 5px ,
+            rgba(0, 123, 255, 0.3) -10px 10px,
+            rgba(0, 123, 255, 0.2) -15px 15px,
+            rgba(0, 123, 255, 0.1) -20px 20px,
+            rgba(0, 123, 255, 0.05) -25px 25px;
+
+}
+
+.main .signup-details label,
+.main .signup-details input {
+    width: 100%; /* Make inputs and labels take full width */
+    margin-bottom: 15px; /* Space between labels and inputs */
+}
+
+.main .signup-details input {
+    padding: 10px; /* Add padding inside input fields */
+    border-radius: 5px; /* Round input field corners */
+    border: 1px solid #ccc; /* Add a light border to input fields */
+ /* Center the text inside input fields */
+}
+
+.signup-btn{
+    height:30px;
+    width:75px;
+    margin:40px;
+    font-size:14px;
+    color:azure;
+    background:rgb(91, 115, 236);
+    border:2px solid blue;
+    border-radius: 5px;
+    cursor:pointer;
+    font-weight: bold;
+}
+.signup-btn:hover{
+    background:blue;
+}
+
+
