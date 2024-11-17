@@ -1,9 +1,14 @@
 import "./dashboard.css";
 import image from "C:/Users/EDWIN/OneDrive/Desktop/JobAI/application/src/assets/user1.png";
 import { useState } from "react";
+import { useLocation } from 'react-router-dom'
 import axios from "axios";
 
-const Dashboard = ({user}) => {
+const Dashboard = () => {
+    const location = useLocation();
+    const { user } = location.state;
+    console.log(user.username);
+
     const job_descriptions = [
         "Looking for a data scientist proficient in machine learning, deep learning, and data analysis.",
         "Hiring a software engineer with experience in cloud technologies like AWS.",
@@ -84,8 +89,12 @@ const Dashboard = ({user}) => {
                     <div className="postings-grid">
                         {job_descriptions.map((description, index) => (
                             <div className="job-data" key={index}>
-                                <h4>Job {index + 1}</h4>
-                                <p>{description}</p>
+                                <div className='description'>
+                                    <p>{description}</p>
+                                </div>
+                                <div className='similarity'>
+                                    <p>50%</p>
+                                </div>
                             </div>
                         ))}
                     </div>
@@ -104,7 +113,7 @@ const Dashboard = ({user}) => {
         <div className="dashboard-main">
             <div className="dash-header">
                 <h1>JobAI</h1>
-                <h1>{user.username}</h1>
+                <h2>{user.username}</h2>
             </div>
             <div className="main-body">
                 <div className="sidebar">

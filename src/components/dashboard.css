@@ -10,7 +10,7 @@
     color: rgb(18, 52, 225);
     display: flex;
     flex-direction: row;
-    gap: 80em;
+    gap: 81em;
 }
 
 .dash-header h1 {
@@ -116,14 +116,37 @@ h3:active {
 }
 
 .job-data {
-    height: 200px;
-    border: 1px solid rgba(190, 186, 186, 0.634);
-    border-radius: 20px;
-    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
-    padding: 10px;
     display: flex;
-    padding-left: 2%;
-    width: 75%; /* Make the job-data divs take full width of their column */
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 75%; /* Adjust as needed for grid layout */
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+}
+
+.description, .similarity {
+    width: 50%;
+    text-align: center;
+    
+}
+
+.description {
+    font-size: 30px;
+    border-right: 1px solid #ddd;
+    padding-right: 10px;
+    text-align: left; /* Align description text to the left */
+}
+
+.similarity {
+    font-size: 25px;
+    padding-left: 10px;
+    font-weight: bold;
+    color: #250fb6; /* Green for positive visuals */
+    text-align: center;
 }
 
 .postings::-webkit-scrollbar {

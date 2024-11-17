@@ -23,11 +23,13 @@ const Signup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
     try {
       const response = await axios.post(`${API_URL}/signup`, formData);
+      const { message, user } = response.data;
       console.log("Succesfull")
       setMessage(response.data.message || "Account created successfully!");
-      navigate("/dashboard");
+      navigate('/dashboard',{ state: { user } });
     } catch (error) {
       console.error("Error signing up:", error);
       setMessage("Could not signup");
