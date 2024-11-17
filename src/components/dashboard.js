@@ -3,7 +3,7 @@ import image from "C:/Users/EDWIN/OneDrive/Desktop/JobAI/application/src/assets/
 import { useState } from "react";
 import axios from "axios";
 
-const Dashboard = () => {
+const Dashboard = ({user}) => {
     const job_descriptions = [
         "Looking for a data scientist proficient in machine learning, deep learning, and data analysis.",
         "Hiring a software engineer with experience in cloud technologies like AWS.",
@@ -104,17 +104,7 @@ const Dashboard = () => {
         <div className="dashboard-main">
             <div className="dash-header">
                 <h1>JobAI</h1>
-                <img
-                    src={image}
-                    alt="logo"
-                    style={{
-                        height: 40,
-                        width: 40,
-                        position: "absolute",
-                        left: 1400,
-                        top: 25,
-                    }}
-                />
+                <h1>{user.username}</h1>
             </div>
             <div className="main-body">
                 <div className="sidebar">
