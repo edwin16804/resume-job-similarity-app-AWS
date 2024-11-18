@@ -22,6 +22,7 @@ const Dashboard = () => {
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const [content, setContent] = useState("upload"); // Dynamic content section
+    const [scores, setScores] = useState([]);
 
     // Handle file selection
     const handleFileChange = (event) => {
@@ -50,6 +51,7 @@ const Dashboard = () => {
             });
 
             setUploadStatus(response.data.summary);
+            setScores(response.data.similarity);
         } catch (err) {
             setError(err.response?.data?.detail || "Failed to upload file.");
         } finally {
@@ -93,7 +95,11 @@ const Dashboard = () => {
                                     <p>{description}</p>
                                 </div>
                                 <div className='similarity'>
-                                    <p>50%</p>
+                                    <p>
+                                        {scores[index] != null
+                                            ? `${Math.round(scores[index] * 100)}%`
+                                            : "No score available"}
+                                    </p>
                                 </div>
                             </div>
                         ))}
