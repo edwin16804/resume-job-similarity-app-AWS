@@ -1,13 +1,13 @@
 import "./dashboard.css";
 import image from "C:/Users/EDWIN/OneDrive/Desktop/JobAI/application/src/assets/user1.png";
 import { useState } from "react";
-import { useLocation } from 'react-router-dom'
+import { useLocation } from "react-router-dom";
 import axios from "axios";
 
 const Dashboard = () => {
     const location = useLocation();
     const { user } = location.state;
-    console.log(user.username);
+    console.log(user.name);
 
     const job_descriptions = [
         "Looking for a data scientist proficient in machine learning, deep learning, and data analysis.",
@@ -21,16 +21,15 @@ const Dashboard = () => {
     const [uploadStatus, setUploadStatus] = useState("");
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
-    const [content, setContent] = useState("upload"); // Dynamic content section
+    const [content, setContent] = useState("upload");
     const [scores, setScores] = useState([]);
+    const [appliedJobs, setAppliedJobs] = useState([]);
 
-    // Handle file selection
     const handleFileChange = (event) => {
         setFile(event.target.files[0]);
-        setError(null); // Clear any previous error
+        setError(null);
     };
 
-    // Handle file upload
     const handleFileUpload = async (event) => {
         event.preventDefault();
         if (!file) {
@@ -59,7 +58,52 @@ const Dashboard = () => {
         }
     };
 
-    // Sections for dynamic rendering
+    const handleApply = async (jobDescription) => {
+        try {
+            const response = await axios.post("https://ocjw3jyw41.execute-api.us-east-1.amazonaws.com/stage1/apply-job", {
+                email: user.email,
+                jobDescription,
+            });
+
+            if (response.status === 200) {
+                alert("Job application submitted successfully!");
+                fetchAppliedJobs();
+            }
+        } catch (err) {
+            console.error(err);
+            alert("Failed to apply for the job.");
+        }
+    };
+
+    const fetchAppliedJobs = async () => {
+        try {
+            const response = await axios.get("https://ocjw3jyw41.execute-api.us-east-1.amazonaws.com/stage1/fetch-applied-jobs", {
+                params: { email: user.email },
+            });
+            
+            setAppliedJobs(response.data);
+        } catch (err) {
+            console.error(err);
+            alert("Failed to fetch applied jobs.");
+        }
+    };
+    const handleWithdrawAll = async () => {
+        try {
+            const response = await axios.delete(
+                "https://ocjw3jyw41.execute-api.us-east-1.amazonaws.com/stage1/withdraw-application",
+                {params: { email: user.email }} 
+            );
+    
+            if (response.status === 200) {
+                alert("All job applications withdrawn successfully!");
+                fetchAppliedJobs(); 
+            }
+        } catch (err) {
+            console.error(err);
+            alert("Failed to withdraw all applications.");
+        }
+    };
+
     const renderContent = () => {
         if (content === "upload") {
             return (
@@ -91,16 +135,22 @@ const Dashboard = () => {
                     <div className="postings-grid">
                         {job_descriptions.map((description, index) => (
                             <div className="job-data" key={index}>
-                                <div className='description'>
+                                <div className="description">
                                     <p>{description}</p>
                                 </div>
-                                <div className='similarity'>
+                                <div className="similarity">
                                     <p>
                                         {scores[index] != null
                                             ? `${Math.round(scores[index] * 100)}%`
                                             : "No score available"}
                                     </p>
                                 </div>
+                                <button
+                                    className="apply-btn"
+                                    onClick={() => handleApply(description)}
+                                >
+                                    Apply
+                                </button>
                             </div>
                         ))}
                     </div>
@@ -110,16 +160,40 @@ const Dashboard = () => {
             return (
                 <div className="postings">
                     <h2>Applications</h2>
+                    {appliedJobs.length === 0 ? (
+                        <div className="no-jobs-message">
+                            <p>NO JOBS APPLIED</p>
+                        </div>
+                    ) : (
+                        <div className="postings-grid">
+                            {appliedJobs.map((job, index) => (
+                                <div className="job-data" key={index}>
+                                    <div className="description">
+                                        <p>{job.jobDescription}</p>
+                                    </div>
+                                    <button
+                                    className="apply-btn"
+                                    onClick={()=>handleWithdrawAll()}
+                                    >
+                                    Withdraw
+                                    </button>
+                                </div>
+
+                                
+                            ))}
+                        </div>
+                    )}
                 </div>
             );
         }
     };
+    
 
     return (
         <div className="dashboard-main">
             <div className="dash-header">
                 <h1>JobAI</h1>
-                <h2>{user.username}</h2>
+                <h2>{user.name}</h2>
             </div>
             <div className="main-body">
                 <div className="sidebar">
@@ -136,7 +210,14 @@ const Dashboard = () => {
                             <h3 onClick={() => setContent("jobs")}>Explore Jobs</h3>
                         </li>
                         <li>
-                            <h3 onClick={() => setContent("applied")}>Applied Jobs</h3>
+                            <h3
+                                onClick={() => {
+                                    setContent("applied");
+                                    fetchAppliedJobs();
+                                }}
+                            >
+                                Applied Jobs
+                            </h3>
                         </li>
                     </ul>
                 </div>
