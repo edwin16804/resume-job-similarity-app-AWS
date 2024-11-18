@@ -1,70 +1,130 @@
-# Getting Started with Create React App
+Here’s a sample `README.md` content for your GitHub project:
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+---
 
-## Available Scripts
+# Job-Resume-Matcher
 
-In the project directory, you can run:
+A web-based application designed to match job descriptions with resumes by computing similarity scores. The project utilizes natural language processing (NLP) models for text summarization and semantic similarity analysis, providing a tool to assess the compatibility of resumes with job listings.
 
-### `npm start`
+## Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **Resume Text Extraction**: Extract text from PDF resumes.
+- **Resume Summarization**: Summarizes lengthy resume content to focus on key skills and experiences.
+- **Job Description Matching**: Matches resumes with relevant job descriptions based on semantic similarity.
+- **Similarity Scoring**: Outputs a similarity score (in percentage) between the resume and job descriptions.
+- **User-Friendly Interface**: Allows easy uploading of PDF resumes for quick analysis.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Tech Stack
 
-### `npm test`
+- **Frontend**:
+  - React
+  - Axios (for making HTTP requests)
+  
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- **Backend**:
+  - Flask (Python web framework)
+  - Hugging Face Transformers for text summarization (BART model)
+  - Sentence-Transformers for computing semantic similarity (using pre-trained models)
+  - PDFMiner for extracting text from resumes
+  - Scikit-learn (for cosine similarity computation)
+  
+## Setup and Installation
 
-### `npm run build`
+### Prerequisites
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Before running the project, make sure you have the following installed:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- Python 3.x
+- Node.js (for frontend)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Backend Setup (Flask)
 
-### `npm run eject`
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-username/job-resume-matcher.git
+   cd job-resume-matcher
+   ```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+2. Create a Python virtual environment:
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   ```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+3. Install the required Python packages:
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+4. Download the pre-trained models (BART, Sentence Transformers) as specified in the `app.py` or modify the paths accordingly.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+5. Run the Flask backend server:
+   ```bash
+   python app.py
+   ```
+   The server will be running at `http://localhost:5000`.
 
-## Learn More
+### Frontend Setup (React)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+1. Navigate to the frontend directory:
+   ```bash
+   cd frontend
+   ```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+2. Install the required Node packages:
+   ```bash
+   npm install  # or yarn install
+   ```
 
-### Code Splitting
+3. Run the React development server:
+   ```bash
+   npm start  # or yarn start
+   ```
+   The app will be running at `http://localhost:3000`.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## How It Works
 
-### Analyzing the Bundle Size
+1. **Upload a Resume**: The user uploads a PDF resume.
+2. **Text Extraction**: The system extracts text from the resume using the `PDFMiner` library.
+3. **Text Summarization**: The extracted text is summarized using a fine-tuned BART model.
+4. **Similarity Calculation**: The summarized resume is compared with a list of predefined job descriptions using semantic similarity models (Sentence-Transformers).
+5. **Display Results**: The app displays similarity scores for each job description in percentage format.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## API Endpoints
 
-### Making a Progressive Web App
+### `/ping`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- **Method**: GET
+- **Description**: Health check endpoint to verify that the backend is running.
 
-### Advanced Configuration
+### `/upload/`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+- **Method**: POST
+- **Description**: Upload a PDF file containing the resume.
+- **Request**: 
+  - Form data: `file` (PDF file)
+- **Response**: JSON with the following fields:
+  - `status`: success or error message
+  - `filename`: name of the uploaded file
+  - `extracted_text`: cleaned text from the resume
+  - `summary`: summarized resume content
+  - `similarity`: List of similarity scores with predefined job descriptions
 
-### Deployment
+## Contributing
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+1. Fork the repository.
+2. Create your feature branch (`git checkout -b feature-name`).
+3. Commit your changes (`git commit -m 'Add new feature'`).
+4. Push to the branch (`git push origin feature-name`).
+5. Create a new Pull Request.
 
-### `npm run build` fails to minify
+## License
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+### Notes:
+- **Model Files**: Make sure to add instructions about downloading or providing paths for the BART and Sentence-Transformer models used in the backend.
+- **Customizations**: Modify the app's behavior based on your own deployment preferences or API usage if needed.
+
