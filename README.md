@@ -1,4 +1,4 @@
-Here’s a sample `README.md` content for your GitHub project:
+
 
 ---
 
@@ -82,6 +82,12 @@ Before running the project, make sure you have the following installed:
    ```
    The app will be running at `http://localhost:3000`.
 
+## Working 
+
+
+https://github.com/user-attachments/assets/7164f2d8-1bc6-4229-9b52-9c78529bcfc5
+
+
 ## How It Works
 
 1. **Upload a Resume**: The user uploads a PDF resume.
@@ -110,17 +116,9 @@ Before running the project, make sure you have the following installed:
   - `summary`: summarized resume content
   - `similarity`: List of similarity scores with predefined job descriptions
 
-## Contributing
 
-1. Fork the repository.
-2. Create your feature branch (`git checkout -b feature-name`).
-3. Commit your changes (`git commit -m 'Add new feature'`).
-4. Push to the branch (`git push origin feature-name`).
-5. Create a new Pull Request.
 
-## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
 
